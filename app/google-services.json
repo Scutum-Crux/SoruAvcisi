@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "439741598609",
+    "project_id": "soruavci",
+    "storage_bucket": "soruavci.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439741598609:android:8da707ed22501e01dee830",
+        "android_client_info": {
+          "package_name": "com.burakkaytaz.soruavcisi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzWf4tKvJFZDvklPcFOpDQqN-BeaZKy5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439741598609:android:02d797f62df0e3afdee830",
+        "android_client_info": {
+          "package_name": "com.examaid.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzWf4tKvJFZDvklPcFOpDQqN-BeaZKy5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
