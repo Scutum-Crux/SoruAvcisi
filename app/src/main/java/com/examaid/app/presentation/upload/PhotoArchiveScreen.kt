@@ -104,14 +104,14 @@ private fun PhotoArchiveContent(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                windowInsets = TopAppBarDefaults.windowInsets
+                windowInsets = TopAppBarDefaults.windowInsets // DİNAMİK ÜST BOŞLUK
             )
         }
     ) { paddingValues ->
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues) // TopAppBar'ın boşluğunu uygula
         ) {
             val horizontalPadding = when {
                 maxWidth < 360.dp -> 16.dp
@@ -151,8 +151,8 @@ private fun PhotoArchiveContent(
                     contentPadding = PaddingValues(
                         start = horizontalPadding,
                         end = horizontalPadding,
-                        top = 20.dp,
-                        bottom = 112.dp
+                        top = 16.dp, // İçeriğin üstten boşluğu
+                        bottom = 16.dp // <-- DEĞİŞİKLİK BURADA (O devasa beyaz boşluğu sildik)
                     ),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {

@@ -4,12 +4,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Archive
@@ -86,8 +89,7 @@ fun DashboardScreen() {
             navController = navController,
             startDestination = Screen.HomeFeed.route,
             modifier = Modifier
-                .padding(innerPadding)
-                .safeDrawingPadding()
+                .padding(innerPadding) // SADECE BU KALSIN. BU, İÇERİĞİN "MAVİ" MENÜNÜN ARKASINA GİTMESİNİ ENGELLER.
         ) {
             composable(Screen.HomeFeed.route) {
                 HomeFeedScreen(
@@ -145,7 +147,8 @@ private fun DashboardBottomBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = horizontalPadding, vertical = verticalPadding),
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
+            .windowInsetsPadding(WindowInsets.navigationBars), // Bu, 3-düğmeli çubuk için DİNAMİK boşluk sağlar. "Beyazlık" değil.
         shape = RoundedCornerShape(28.dp),
         color = MaterialTheme.colorScheme.surface,
         tonalElevation = 6.dp,

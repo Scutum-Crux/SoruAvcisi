@@ -24,10 +24,14 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold // YENİ EKLENDİ
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar // YENİ EKLENDİ
+import androidx.compose.material3.TopAppBarDefaults // YENİ EKLENDİ
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,14 +42,38 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.examaid.app.R
 
+@OptIn(ExperimentalMaterial3Api::class) // YENİ EKLENDİ
 @Composable
 fun HomeFeedScreen(
     onOpenUpload: () -> Unit,
     onOpenArchive: () -> Unit,
     onOpenSchedule: () -> Unit
 ) {
-    Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-        BoxWithConstraints {
+    // Surface(modifier = Modifier.fillMaxSize()... ) <-- ESKİ KOD SİLİNDİ
+
+    // YENİ SCAFFOLD VE TOPAPPBAR EKLENDİ
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = stringResource(id = R.string.nav_home), // "Ana Sayfa"
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                ),
+                windowInsets = TopAppBarDefaults.windowInsets // DİNAMİK ÜST BOŞLUK
+            )
+        }
+    ) { paddingValues -> // paddingValues, TopAppBar'ın boşluğudur
+        BoxWithConstraints(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues) // TopAppBar'ın boşluğunu uygula
+        ) {
             val horizontalPadding = when {
                 maxWidth < 360.dp -> 16.dp
                 maxWidth < 600.dp -> 24.dp
@@ -101,8 +129,8 @@ fun HomeFeedScreen(
                 contentPadding = PaddingValues(
                     start = horizontalPadding,
                     end = horizontalPadding,
-                    top = sectionSpacing,
-                    bottom = sectionSpacing + 80.dp
+                    top = sectionSpacing, // İçeriğin üstten boşluğu
+                    bottom = sectionSpacing // <-- DEĞİŞİKLİK BURADA (O devasa beyaz alanı sildik)
                 ),
                 verticalArrangement = Arrangement.spacedBy(sectionSpacing)
             ) {

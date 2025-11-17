@@ -168,14 +168,15 @@ fun UploadPhotoScreen(
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
-                )
+                ),
+                windowInsets = TopAppBarDefaults.windowInsets // DİNAMİK ÜST BOŞLUK
             )
         }
     ) { paddingValues ->
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(paddingValues) // TopAppBar'ın boşluğunu uygula
         ) {
             val horizontalPadding = when {
                 maxWidth < 360.dp -> 16.dp
@@ -189,8 +190,8 @@ fun UploadPhotoScreen(
                     .padding(
                         start = horizontalPadding,
                         end = horizontalPadding,
-                        top = 12.dp,
-                        bottom = 24.dp
+                        top = 16.dp, // İçeriğin üstten boşluğu
+                        bottom = 16.dp // <-- DEĞİŞİKLİK BURADA (O devasa beyaz boşluğu sildik)
                     )
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -451,4 +452,3 @@ private fun createImageUri(context: Context): Uri? {
         )
     }.getOrNull()
 }
-

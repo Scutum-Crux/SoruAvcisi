@@ -1,5 +1,6 @@
 package com.examaid.app.presentation.onboarding
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding // <-- YENİ IMPORT
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -50,6 +52,7 @@ private data class OnboardingPage(
     val icon: @Composable () -> Unit
 )
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingScreen(
@@ -103,7 +106,10 @@ fun OnboardingScreen(
     }
 
     Surface(
-        modifier = modifier.fillMaxSize(),
+        // modifier = modifier.fillMaxSize(), <-- ESKİ KOD
+        modifier = modifier
+            .fillMaxSize()
+            .safeDrawingPadding(), // <-- YENİ KOD (Tüm ekranın sistem çubuklarından kaçınmasını sağlar)
         color = MaterialTheme.colorScheme.background
     ) {
         Column(
@@ -247,4 +253,3 @@ private fun PagerIndicator(
         )
     }
 }
-
