@@ -6,3 +6,5 @@ enum class PhotoReason {
     COULD_NOT_SOLVE
 }
 
+
+

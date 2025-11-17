@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -65,7 +66,7 @@ fun HomeFeedScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                windowInsets = TopAppBarDefaults.windowInsets // DİNAMİK ÜST BOŞLUK
+                windowInsets = WindowInsets(0, 0, 0, 0)
             )
         }
     ) { paddingValues -> // paddingValues, TopAppBar'ın boşluğudur
@@ -129,8 +130,8 @@ fun HomeFeedScreen(
                 contentPadding = PaddingValues(
                     start = horizontalPadding,
                     end = horizontalPadding,
-                    top = sectionSpacing, // İçeriğin üstten boşluğu
-                    bottom = sectionSpacing // <-- DEĞİŞİKLİK BURADA (O devasa beyaz alanı sildik)
+                    top = sectionSpacing,
+                    bottom = 8.dp // Navigation bar üstündeki boşluğu minimize ettik
                 ),
                 verticalArrangement = Arrangement.spacedBy(sectionSpacing)
             ) {

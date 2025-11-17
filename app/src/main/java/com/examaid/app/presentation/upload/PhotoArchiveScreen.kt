@@ -104,7 +104,7 @@ private fun PhotoArchiveContent(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                windowInsets = TopAppBarDefaults.windowInsets // DİNAMİK ÜST BOŞLUK
+                windowInsets = WindowInsets(0, 0, 0, 0)
             )
         }
     ) { paddingValues ->
@@ -151,8 +151,8 @@ private fun PhotoArchiveContent(
                     contentPadding = PaddingValues(
                         start = horizontalPadding,
                         end = horizontalPadding,
-                        top = 16.dp, // İçeriğin üstten boşluğu
-                        bottom = 16.dp // <-- DEĞİŞİKLİK BURADA (O devasa beyaz boşluğu sildik)
+                        top = 16.dp,
+                        bottom = 8.dp // Navigation bar üstündeki boşluğu minimize ettik
                     ),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {

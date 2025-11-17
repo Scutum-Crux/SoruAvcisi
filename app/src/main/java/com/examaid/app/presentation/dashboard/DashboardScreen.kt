@@ -148,7 +148,7 @@ private fun DashboardBottomBar(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = horizontalPadding, vertical = verticalPadding)
-            .windowInsetsPadding(WindowInsets.navigationBars), // Bu, 3-düğmeli çubuk için DİNAMİK boşluk sağlar. "Beyazlık" değil.
+            .windowInsetsPadding(WindowInsets.navigationBars),
         shape = RoundedCornerShape(28.dp),
         color = MaterialTheme.colorScheme.surface,
         tonalElevation = 6.dp,
