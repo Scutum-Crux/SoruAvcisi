@@ -1,9 +1,13 @@
 package com.examaid.app.core.constants
 
+import java.time.ZoneId
+
 object Constants {
     // Database
     const val DATABASE_NAME = "examaid_database"
-    const val DATABASE_VERSION = 2
+    const val DATABASE_VERSION = 3
+
+    val TURKEY_ZONE: ZoneId = ZoneId.of("Europe/Istanbul")
     
     // Preferences
     const val PREFERENCES_NAME = "examaid_preferences"

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.examaid.app.core.util.Resource
 import com.examaid.app.domain.model.PhotoNote
 import com.examaid.app.domain.model.PhotoReason
+import com.examaid.app.domain.usecase.flashcard.CreateFlashcardUseCase
 import com.examaid.app.domain.usecase.photo.SavePhotoNoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class UploadPhotoViewModel @Inject constructor(
-    private val savePhotoNoteUseCase: SavePhotoNoteUseCase
+    private val savePhotoNoteUseCase: SavePhotoNoteUseCase,
+    private val createFlashcardUseCase: CreateFlashcardUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UploadPhotoUiState())
@@ -69,11 +71,26 @@ class UploadPhotoViewModel @Inject constructor(
                 note = state.value.note
             )) {
                 is Resource.Success -> {
+                    val savedNote = result.data
                     _state.update {
                         it.copy(
                             isSaving = false,
-                            savedNote = result.data
+                            savedNote = savedNote
                         )
+                    }
+
+                    if (savedNote != null) {
+                        when (val flashcardResult = createFlashcardUseCase(savedNote)) {
+                            is Resource.Error -> {
+                                _state.update { current ->
+                                    current.copy(
+                                        errorMessage = flashcardResult.message
+                                            ?: "Çalışma kartı kaydedilirken hata oluştu."
+                                    )
+                                }
+                            }
+                            else -> Unit
+                        }
                     }
                 }
                 is Resource.Error -> {

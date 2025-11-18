@@ -44,8 +44,8 @@ import com.examaid.app.core.navigation.Screen
 import com.examaid.app.presentation.home.HomeFeedScreen
 import com.examaid.app.presentation.upload.PhotoArchiveScreen
 import com.examaid.app.presentation.upload.UploadPhotoScreen
-import com.examaid.app.presentation.util.ScheduleScreen
 import com.examaid.app.presentation.util.SettingsScreen
+import com.examaid.app.presentation.repeat.RepeatSchedulerScreen
 
 private data class BottomDestination(
     val route: String,
@@ -107,7 +107,7 @@ fun DashboardScreen() {
             }
 
             composable(Screen.Schedule.route) {
-                ScheduleScreen()
+                RepeatSchedulerScreen()
             }
 
             composable(Screen.Settings.route) {
@@ -147,7 +147,7 @@ private fun DashboardBottomBar(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding) // <-- ÖNCEKİ HALİ
             .windowInsetsPadding(WindowInsets.navigationBars),
         shape = RoundedCornerShape(28.dp),
         color = MaterialTheme.colorScheme.surface,

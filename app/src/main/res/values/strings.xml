@@ -31,8 +31,8 @@
     <string name="back_to_login">Girişe Dön</string>
     <string name="default_web_client_id">CHANGE_ME_WEB_CLIENT_ID</string>
     <string name="upload_photo_title">Soru Yükle</string>
-    <string name="upload_photo_subtitle">Soru fotoğrafını kamerayla çek veya galeriden seç. Önizledikten sonra OCR ile metin çıkaracağız.</string>
-    <string name="upload_photo_camera">Kamerayla Tara</string>
+    <string name="upload_photo_subtitle">Soru fotoğrafını kamerayla çek veya galeriden seç.</string>
+    <string name="upload_photo_camera">Fotoğrafını Çek</string>
     <string name="upload_photo_gallery">Galeriden Seç</string>
     <string name="upload_photo_not_selected">Herhangi bir görsel seçilmedi.</string>
     <string name="upload_photo_capture_failed">Fotoğraf çekme başarısız oldu.</string>
@@ -88,6 +88,13 @@
     <string name="schedule_repeat">Tekrar Planla</string>
     <string name="periodic">Periyodik</string>
     <string name="manual">Manuel</string>
+    <string name="schedule_empty_title">Henüz plan yok</string>
+    <string name="schedule_empty_subtitle">Kaydettiğin sorular tekrar planına eklendikçe burada görünecek.</string>
+    <string name="schedule_next_review_label">Sonraki tekrar: %1$s</string>
+    <string name="schedule_period_options_title">Önerilen aralıklar</string>
+    <string name="schedule_period_option_days">+%1$d gün</string>
+    <string name="schedule_manual_button">Manuel tarih seç</string>
+    <string name="schedule_quick_test_button">15 saniye sonra hatırlat</string>
     
     <!-- Literature -->
     <string name="topics">Konular</string>

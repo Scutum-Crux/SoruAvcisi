@@ -20,14 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.examaid.app.R
 
 @Composable
-fun ScheduleScreen() {
-    PlaceholderScreen(
-        title = stringResource(id = R.string.nav_schedule), // "Planlar"
-        subtitle = stringResource(id = R.string.schedule_placeholder_subtitle)
-    )
-}
-
-@Composable
 fun SettingsScreen() {
     PlaceholderScreen(
         title = stringResource(id = R.string.nav_settings), // "Ayarlar"
@@ -51,7 +43,7 @@ private fun PlaceholderScreen(title: String, subtitle: String) {
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                windowInsets = WindowInsets(0, 0, 0, 0)
+                windowInsets = WindowInsets(0, 0, 0, 0) // <-- ÖNCEKİ HALİ
             )
         }
     ) { paddingValues -> // Bu, TopAppBar'ın kapladığı alanı içerir
@@ -85,4 +77,3 @@ private fun PlaceholderScreen(title: String, subtitle: String) {
         }
     }
 }
-

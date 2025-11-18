@@ -123,9 +123,9 @@ app/
 - [x] TASK-003: UI: Splash + Onboarding + Home
 - [x] TASK-004: Upload flow: Camera + Gallery + preview
 - [x] TASK-005: Photo upload metadata (lesson, reason, note) + archive view
-- [ ] TASK-006: Flashcard model + save to Room + cloud sync
-- [ ] TASK-007: Scheduler: period options + manual date picker
-- [ ] TASK-008: Notification worker (WorkManager) + reminders
+- [x] TASK-006: Flashcard model + save to Room + cloud sync
+- [x] TASK-007: Scheduler: period options + manual date picker
+- [x] TASK-008: Notification worker (WorkManager) + reminders
 - [ ] TASK-009: Study session UI: Image viewer + recall input
 - [ ] TASK-010: Topic content API / local content loader
 - [ ] TASK-011: Test runner: 20q test flow + scoring

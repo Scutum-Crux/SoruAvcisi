@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -191,12 +192,30 @@ fun LoginScreen(
             
             Spacer(modifier = Modifier.height(8.dp))
             
-            // Forgot Password
-            TextButton(
-                onClick = { viewModel.onEvent(LoginEvent.ForgotPassword) },
-                modifier = Modifier.align(Alignment.End)
+            // Remember Me & Forgot Password
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(stringResource(R.string.forgot_password))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Checkbox(
+                        checked = state.rememberMe,
+                        onCheckedChange = { viewModel.onEvent(LoginEvent.ToggleRememberMe) }
+                    )
+                    Text(
+                        text = "Beni Hatırla",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+                
+                TextButton(
+                    onClick = { viewModel.onEvent(LoginEvent.ForgotPassword) }
+                ) {
+                    Text(stringResource(R.string.forgot_password))
+                }
             }
             
             Spacer(modifier = Modifier.height(24.dp))

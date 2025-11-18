@@ -66,7 +66,7 @@ fun HomeFeedScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 ),
-                windowInsets = WindowInsets(0, 0, 0, 0)
+                windowInsets = WindowInsets(0, 0, 0, 0) // <-- ÖNCEKİ HALİ
             )
         }
     ) { paddingValues -> // paddingValues, TopAppBar'ın boşluğudur

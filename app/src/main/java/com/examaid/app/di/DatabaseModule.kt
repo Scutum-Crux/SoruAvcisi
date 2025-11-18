@@ -32,5 +32,9 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun providePhotoNoteDao(database: ExamAidDatabase) = database.photoNoteDao()
+
+    @Provides
+    @Singleton
+    fun provideFlashcardDao(database: ExamAidDatabase) = database.flashcardDao()
 }
 

@@ -8,18 +8,21 @@ import androidx.lifecycle.viewModelScope
 import com.examaid.app.core.navigation.Screen
 import com.examaid.app.core.util.Resource
 import com.examaid.app.core.util.UiEvent
+import com.examaid.app.data.local.preferences.UserPreferences
 import com.examaid.app.domain.usecase.auth.LoginWithEmailUseCase
 import com.examaid.app.domain.usecase.auth.LoginWithGoogleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginWithEmailUseCase: LoginWithEmailUseCase,
-    private val loginWithGoogleUseCase: LoginWithGoogleUseCase
+    private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
+    private val userPreferences: UserPreferences
 ) : ViewModel() {
     
     private val logTag = "LoginViewModel"
@@ -33,6 +36,25 @@ class LoginViewModel @Inject constructor(
     private var lastEmailLoginAt = 0L
     private var lastGoogleLoginAt = 0L
     private val cooldownMillis = 2_000L
+    
+    init {
+        loadSavedCredentials()
+    }
+    
+    private fun loadSavedCredentials() {
+        viewModelScope.launch {
+            val rememberMe = userPreferences.rememberMe.first()
+            if (rememberMe) {
+                val email = userPreferences.savedEmail.first()
+                val password = userPreferences.savedPassword.first()
+                _state.value = _state.value.copy(
+                    email = email ?: "",
+                    password = password ?: "",
+                    rememberMe = true
+                )
+            }
+        }
+    }
     
     fun onEvent(event: LoginEvent) {
         when (event) {
@@ -49,6 +71,11 @@ class LoginViewModel @Inject constructor(
             is LoginEvent.TogglePasswordVisibility -> {
                 _state.value = _state.value.copy(
                     isPasswordVisible = !_state.value.isPasswordVisible
+                )
+            }
+            is LoginEvent.ToggleRememberMe -> {
+                _state.value = _state.value.copy(
+                    rememberMe = !_state.value.rememberMe
                 )
             }
             is LoginEvent.Login -> {
@@ -103,6 +130,18 @@ class LoginViewModel @Inject constructor(
                 is Resource.Success -> {
                     Log.d(logTag, "loginWithEmail successful for ${_state.value.email}")
                     println("$logTag: loginWithEmail success for ${_state.value.email}")
+                    
+                    // Beni hatırla seçiliyse kimlik bilgilerini kaydet
+                    if (_state.value.rememberMe) {
+                        userPreferences.saveCredentials(
+                            email = _state.value.email,
+                            password = _state.value.password,
+                            remember = true
+                        )
+                    } else {
+                        userPreferences.clearCredentials()
+                    }
+                    
                     _uiEvent.send(UiEvent.Navigate(Screen.Dashboard.route))
                 }
                 is Resource.Error -> {
@@ -169,6 +208,7 @@ data class LoginState(
     val email: String = "",
     val password: String = "",
     val isPasswordVisible: Boolean = false,
+    val rememberMe: Boolean = false,
     val isLoading: Boolean = false,
     val error: String? = null
 )
@@ -177,6 +217,7 @@ sealed class LoginEvent {
     data class EmailChanged(val email: String) : LoginEvent()
     data class PasswordChanged(val password: String) : LoginEvent()
     data object TogglePasswordVisibility : LoginEvent()
+    data object ToggleRememberMe : LoginEvent()
     data object Login : LoginEvent()
     data class LoginWithGoogle(val idToken: String) : LoginEvent()
     data object NavigateToRegister : LoginEvent()

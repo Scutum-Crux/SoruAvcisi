@@ -1,8 +1,10 @@
 package com.examaid.app.di
 
 import com.examaid.app.data.repository.AuthRepositoryImpl
+import com.examaid.app.data.repository.FlashcardRepositoryImpl
 import com.examaid.app.data.repository.PhotoNoteRepositoryImpl
 import com.examaid.app.domain.repository.AuthRepository
+import com.examaid.app.domain.repository.FlashcardRepository
 import com.examaid.app.domain.repository.PhotoNoteRepository
 import dagger.Binds
 import dagger.Module
@@ -25,5 +27,11 @@ abstract class RepositoryModule {
     abstract fun bindPhotoNoteRepository(
         photoNoteRepositoryImpl: PhotoNoteRepositoryImpl
     ): PhotoNoteRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFlashcardRepository(
+        flashcardRepositoryImpl: FlashcardRepositoryImpl
+    ): FlashcardRepository
 }
 
